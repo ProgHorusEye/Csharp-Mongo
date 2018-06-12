@@ -52,13 +52,38 @@ namespace Mongoessai
 
             List<Person> resultall = collection.Find(x => true).ToList();
 
-            Console.WriteLine(resultall.Count().ToString() + "Personnes trouvées");
+            Console.WriteLine(resultall.Count().ToString() + " Personnes trouvées");
+
+            Person personne;
 
             foreach (Person p in resultall)
             {
+                personne = p;
                 Console.WriteLine(p.id + " : " + p.FirstName + " " + p.LastName + "(" + p.Age + ")" );
             }
-            
+
+            Console.ReadLine();
+
+            personne = collection.Find(x => x.LastName == "Tasse").ToList().FirstOrDefault();
+
+
+            var filter = Builders<Person>.Filter.Eq(x => x.LastName, "Tasse");
+
+            var update = Builders<Person>.Update.Set(x => x.LastName, "Bonneau");
+
+            collection.UpdateOne(filter, update);
+
+
+
+            resultall = collection.Find(x => true).ToList();
+
+            foreach (Person p in resultall)
+            {
+                personne = p;
+                Console.WriteLine(p.id + " : " + p.FirstName + " " + p.LastName + "(" + p.Age + ")");
+            }
+
+
             Console.ReadLine();
         }
     }
