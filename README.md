@@ -1,1 +1,2 @@
-# Csharp-Mongo
+# Csharp - Mongodb
+# Exercice de découverte
